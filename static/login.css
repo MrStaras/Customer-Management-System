@@ -1,14 +1,172 @@
-html body{
+/* General page styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     background-color: #010C23;
-    font-family: Arial, sans-serif; 
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-form{
-    width: 400px;
-    height: 450px;
-    margin: 100px auto;
-    padding: 30px;
-    background-color: #2B4559;
+/* Login form container */
+.login-form {
+    width: 300px;
+    padding: 40px 30px 40px 40px;
+    background-color: #1F2A38;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Labels */
+.login-form label {
+    align-self: flex-start;
+    color: #00CFFF;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Inputs */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 35px;
+    border-radius: 6px;
+    border: solid 2px #4601a1f7;
+    outline: none;
+    background-color: #374A5A;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+/* Input placeholder */
+.login-form input::placeholder {
+    color: #B0B0B0;
+}
+
+/* Submit button */
+.login-form button {
+    width: 160px;
+    padding: 12px;
+    margin: 15px 75px;
+    background-color: #010C23;
+    color: #00CFFF;
+    border: solid 1px #4601a1f7;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    font-weight: bold;
+}
+
+.login-form button:hover {
+    background-color: #005F8C;
+}
+
+/* Forgot password link */
+.login-form a {
+    margin: 10px 110px;
+    font-size: 12px;
+    color: #00CFFF;
+    text-decoration: none;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    position: fixed;
+    bottom: 2vh;    /* 2% of viewport height */
+    left: 2vw;      /* 2% of viewport width */
+    width: 10vw;     /* scales with viewport width */
+    max-width: 70px; /* prevents it from becoming too large */
+    height: auto;
+    opacity: 0.8;
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+
+/* Styles for phone screens */
+@media (max-width: 480px) {
+    /* Login form container */
+    .login-form {
+        width: 300px;
+        padding: 40px 30px 40px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Labels */
+    .login-form label {
+        align-self: flex-start;
+        color: #00CFFF;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    /* Inputs */
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 35px;
+        border-radius: 6px;
+        border: solid 3px #4601a1f7;
+        outline: none;
+        background-color: #374A5A;
+        color: #FFFFFF;
+        font-size: 14px;
+    }
+
+    /* Submit button */
+    .login-form button {
+        width: 150px;
+        padding: 12px;
+        margin: 15px 70px;
+        background-color: #010C23;
+        color: #00CFFF;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .login-form button:hover {
+        background-color: #005F8C;
+    }
+
+    /* Forgot password link */
+    .login-form a {
+        margin: 10px 100px;
+        font-size: 12px;
+        color: #00CFFF;
+        text-decoration: none;
+    }
+
+    .login-form a:hover {
+        text-decoration: underline;
+    }
+
+    /* Logo */
+    .logo {
+        position: fixed;
+        bottom: 2vh;
+        left: 2vw;
+        width: 10vw;
+        max-width: 70px;
+        height: auto;
+        opacity: 0.8;
+        z-index: 1000;
+        border-radius: 4px;
+    }
 }

@@ -1,49 +1,46 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
 from flask_migrate import Migrate
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_security import Security, SQLAlchemyUserDatastore, login_required
 import secrets
+
+# Import models and db from models.py
+from models import db, User, Role, roles_users
 
 app = Flask(__name__)
 
-# --- Configuration ---
+# ---------------------------
+# Configuration
+# ---------------------------
 app.config['SECRET_KEY'] = secrets.token_hex(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cms.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# --- Initialize extensions ---
-db = SQLAlchemy(app)
+# Flask-Security settings
+app.config['SECURITY_PASSWORD_SALT'] = secrets.token_hex(16)
+app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
+app.config['SECURITY_REGISTERABLE'] = False
+app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
+
+# ---------------------------
+# Initialize extensions
+# ---------------------------
+db.init_app(app)
 migrate = Migrate(app, db)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login_page'
 
-# --- Import models AFTER db is defined ---
-from models import User, Customer
+# ---------------------------
+# Flask-Security setup
+# ---------------------------
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
 
-# --- User loader for Flask-Login ---
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# ---------------------------
+# Routes
+# ---------------------------
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-# --- Routes ---
-@app.route('/login', methods=['GET', 'POST'])
-def login_page():
-    if request.method == 'POST':
-        user = User.query.filter_by(email=request.form['email']).first()
-        if user and user.check_password(request.form['password']):
-            login_user(user)
-            return redirect(url_for('customers'))
-        return "Invalid credentials", 401
-    return render_template('login.html')
-
-@app.route('/customers')
+@app.route('/dashboard')
 @login_required
-def customers():
-    all_customers = Customer.query.all()
-    return {"customers": [c.name for c in all_customers]}
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login_page'))
+def dashboard():
+    return "Dashboard placeholder"

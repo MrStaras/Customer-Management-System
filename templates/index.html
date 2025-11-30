@@ -9,13 +9,16 @@
 <body>
     <div class="login-form">
         <form method="POST" action="/login">
-            <h2>Login to ConsultPro</h2>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
+            <!-- Forgot password link -->
+            <a href="/forgot-password" class="forgot-password">Forgot password?</a>
         </form>
     </div>
+    <!-- Logo -->
+    <img class="logo" src="{{ url_for('static', filename='images/ConsultPro.png') }}" alt="ConsultPro Logo">
 </body>
 </html>
