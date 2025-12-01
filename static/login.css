@@ -30,10 +30,11 @@ html, body {
     font-size: 14px;
 }
 
-/* Inputs */
+/* Inputs styling (Applies to email, password, and text) */
 .login-form input[type="email"],
-.login-form input[type="password"] {
-    width: 300px;
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    width: 300px; 
     padding: 10px;
     margin-bottom: 35px;
     border-radius: 6px;
@@ -42,6 +43,7 @@ html, body {
     background-color: #374A5A;
     color: #FFFFFF;
     font-size: 14px;
+    box-sizing: content-box; /* Preserves your original sizing logic */
 }
 
 /* Input placeholder */
@@ -49,7 +51,40 @@ html, body {
     color: #B0B0B0;
 }
 
-/* Submit button */
+/* --- PASSWORD WRAPPER --- */
+.password-wrapper {
+    position: relative;
+    width: 324px; /* Matches input width + padding + border */
+    margin-bottom: 35px;
+}
+
+/* Remove margin from input inside wrapper and make room for icon */
+.password-wrapper input {
+    margin-bottom: 0 !important;
+    width: 300px !important;
+    padding-right: 40px !important; 
+    width: 270px !important; /* Subtract padding from width */
+}
+
+/* Eye Icon Container */
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Highlight eye on hover */
+.eye-icon svg:hover {
+    stroke: #ffffff;
+}
+
+/* --- BUTTONS --- */
 .login-form button {
     width: 160px;
     padding: 12px;
@@ -72,22 +107,21 @@ html, body {
     text-decoration: underline;
 }
 
+/* --- LOGO --- */
 .logo {
     position: fixed;
-    bottom: 2vh;    /* 2% of viewport height */
-    left: 2vw;      /* 2% of viewport width */
-    width: 10vw;     /* scales with viewport width */
-    max-width: 70px; /* prevents it from becoming too large */
+    bottom: 2vh;
+    left: 2vw;
+    width: 10vw;
+    max-width: 70px;
     height: auto;
     opacity: 0.8;
     z-index: 1000;
     border-radius: 4px;
 }
 
-
-/* Styles for phone screens */
+/* --- MOBILE STYLES --- */
 @media (max-width: 480px) {
-    /* Login form container */
     .login-form {
         width: 300px;
         padding: 40px 30px 40px 40px;
@@ -95,70 +129,22 @@ html, body {
         flex-direction: column;
         align-items: center;
     }
-
-    /* Labels */
+    .password-wrapper {
+        width: 324px;
+    }
     .login-form label {
         align-self: flex-start;
         color: #00CFFF;
         margin-bottom: 5px;
         font-size: 14px;
     }
-
-    /* Inputs */
-    .login-form input[type="email"],
-    .login-form input[type="password"] {
-        width: 300px;
-        padding: 10px;
-        margin-bottom: 35px;
-        border-radius: 6px;
-        border: solid 3px #4601a1f7;
-        outline: none;
-        background-color: #374A5A;
-        color: #FFFFFF;
-        font-size: 14px;
-    }
-
-    /* Submit button */
     .login-form button {
         width: 150px;
-        padding: 12px;
         margin: 15px 70px;
-        background-color: #010C23;
-        color: #00CFFF;
         border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        transition: background 0.3s ease;
     }
-
-    .login-form button:hover {
-        background-color: #005F8C;
-    }
-
-    /* Forgot password link */
-    .login-form a {
-        margin: 10px 100px;
-        font-size: 12px;
-        color: #00CFFF;
-        text-decoration: none;
-    }
-
-    .login-form a:hover {
-        text-decoration: underline;
-    }
-
-    /* Logo */
     .logo {
-        position: fixed;
         bottom: 2vh;
         left: 2vw;
-        width: 10vw;
-        max-width: 70px;
-        height: auto;
-        opacity: 0.8;
-        z-index: 1000;
-        border-radius: 4px;
     }
 }
