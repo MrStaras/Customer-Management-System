@@ -68,14 +68,6 @@ html, body {
     background-color: #005F8C;
 }
 
-/* Forgot password link */
-.login-form a {
-    margin: 10px 110px;
-    font-size: 12px;
-    color: #00CFFF;
-    text-decoration: none;
-}
-
 .login-form a:hover {
     text-decoration: underline;
 }

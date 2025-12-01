@@ -1,46 +1,34 @@
-from flask import Flask, render_template
-from flask_migrate import Migrate
-from flask_security import Security, SQLAlchemyUserDatastore, login_required
-import secrets
+from flask import Flask, redirect, url_for
+from flask_login import LoginManager
+from config import Config
+from models import db, User
+from auth import auth_bp
+from routes import main_bp
 
-# Import models and db from models.py
-from models import db, User, Role, roles_users
-
+#1. Initialize Flask application and load configuration
 app = Flask(__name__)
+app.config.from_object('config.Config')
 
-# ---------------------------
-# Configuration
-# ---------------------------
-app.config['SECRET_KEY'] = secrets.token_hex(32)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cms.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Flask-Security settings
-app.config['SECURITY_PASSWORD_SALT'] = secrets.token_hex(16)
-app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
-app.config['SECURITY_REGISTERABLE'] = False
-app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
-
-# ---------------------------
-# Initialize extensions
-# ---------------------------
+#2. Initialize database and Login Manager
 db.init_app(app)
-migrate = Migrate(app, db)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
 
-# ---------------------------
-# Flask-Security setup
-# ---------------------------
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-# ---------------------------
-# Routes
-# ---------------------------
+#3. Register authentication blueprint
+app.register_blueprint(auth_bp)
+app.register_blueprint(main_bp)
+
+#4 . Define root route to redirect to main page
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    return redirect(url_for('auth.login'))
 
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    return "Dashboard placeholder"
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        app.run(debug=True)
