@@ -10,11 +10,11 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         # 1. Get email (not username) from the form
-        email = request.form.get('email')   # Make sure this line matches too!
+        email = request.form.get('email')  
         password = request.form.get('password')
 
         # 2. Validate user credentials using email
-        user = User.query.filter_by(email=email).first()  # <-- CHANGED HERE
+        user = User.query.filter_by(email=email).first()  
 
         if user and user.check_password(password):
             login_user(user)

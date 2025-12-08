@@ -1,0 +1,148 @@
+/* General Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2C3E50; /* Main Dark Blue Background */
+    color: #ECF0F1; /* Light Text Color */
+    min-height: 100vh;
+    position: relative; /* For logo positioning */
+}
+
+/* --- Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A252F; /* Darker Blue for Navbar */
+    padding: 1rem 2rem;
+    border-bottom: 3px solid #1A252F;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00CFFF; /* Cyan Brand Color */
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #BDC3C7;
+    margin-left: 1.5rem;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+    color: #00CFFF;
+}
+
+/* --- Dashboard Layout --- */
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* General Card Styles */
+.card {
+    background-color: #34495E; /* Slightly Lighter Blue for Cards */
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Stats Grid (Top 4 Cards) --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: #00CFFF;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+/* --- Content Grid (Bottom 2 Cards) --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.content-card h2 {
+    font-size: 1.2rem;
+    color: #00CFFF;
+    margin-bottom: 1rem;
+}
+
+/* --- Data Tables --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 0.75rem 0;
+}
+
+.data-table th {
+    color: #00CFFF;
+    font-weight: normal;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #2C3E50;
+}
+
+.data-table td {
+    font-size: 0.95rem;
+    color: #ECF0F1;
+}
+
+/* --- Logo --- */
+.logo-container {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.logo-container img {
+    height: 50px;
+    width: auto;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-links {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .navbar-links a {
+        margin: 0.5rem 1rem 0.5rem 0;
+    }
+    .content-grid {
+        grid-template-columns: 1fr; /* Stack content cards on smaller screens */
+    }
+}

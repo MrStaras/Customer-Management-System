@@ -1,14 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ConsultPro</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConsultPro Dashboard</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
 
+    <header class="navbar">
+        <div class="navbar-brand">ConsultPro Dashboard</div>
+        <nav class="navbar-links">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="#">Clients</a>
+            <a href="#">Projects</a>
+            <a href="#">Tasks</a>
+            {% if current_user.role == 'Administrator' %}
+                    <a href="#">Analytics</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </nav>
+    </header>
 
+    <main class="dashboard-container">
+        
+        <section class="stats-grid">
+            <div class="card stat-card">
+                <h3>Clients</h3>
+                <p class="stat-value">24</p>
+            </div>
+            <div class="card stat-card">
+                <h3>Active Projects</h3>
+                <p class="stat-value">8</p>
+            </div>
+            <div class="card stat-card">
+                <h3>Completed Tasks</h3>
+                <p class="stat-value">42</p>
+            </div>
+            <div class="card stat-card">
+                <h3>Consultant Performance</h3>
+                <p class="stat-value">Good</p>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            
+            <div class="card content-card">
+                <h2>Recent Projects</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Client</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Strategy Plan</td>
+                            <td>Consult Corp</td>
+                            <td>In Progress</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="card content-card">
+                <h2>Recent Tasks</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Review</td>
+                            <td>High</td>
+                            <td>Pending</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+
+        </section>
+    </main>
+
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/ConsultPro.png') }}" alt="ConsultPro Logo" class="logo">
+    </div>
 
 </body>
 </html>
